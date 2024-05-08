@@ -16,6 +16,7 @@ import {
   updateUserStarts,
   updateUserSuccess,
 } from "../redux/user/userSlice";
+import { API_BASE_URL, getCookie } from "../../utils/constants";
 export default function Profile() {
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [file, setFile] = useState(undefined);
@@ -63,11 +64,12 @@ export default function Profile() {
     const userId = currentUser?._id;
     try {
       const response = await fetch(
-        `http://localhost:5173/api/user/update/${userId}`,
+        `${API_BASE_URL}/api/user/update/${userId}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+           "Authorization": `Bearer ${getCookie("access_token")}`,
           },
           body: JSON.stringify(formData),
         }
@@ -88,7 +90,7 @@ export default function Profile() {
     try {
       dispatch(deleteUserStarts());
       const res = await fetch(
-        `http://localhost:5173/api/user/delete/${currentUser?._id}`,
+        `${API_BASE_URL}/api/user/delete/${currentUser?._id}`,
         {
           method: "DELETE",
         }
@@ -106,7 +108,7 @@ export default function Profile() {
 
   const signOutHandler = async () => {
     try {
-      await fetch("/api/auth/signout");
+      await fetch(`${API_BASE_URL}/api/auth/signout`);
       dispatch(signOutSuccess());
     } catch (error) {
       console.log(error);

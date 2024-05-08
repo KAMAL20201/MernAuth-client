@@ -7,6 +7,7 @@ import {
 } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 import OAuth from "../components/OAuth";
+import { API_BASE_URL } from "../../utils/constants";
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
@@ -22,7 +23,7 @@ export default function SignIn() {
     try {
       dispatch(signInStart());
       e.preventDefault();
-      const response = await fetch("/api/auth/sign-in", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/sign-in`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../components/OAuth";
 import toast from "react-hot-toast";
-
+import { API_BASE_URL } from "../../utils/constants";
 export default function SignUp() {
   const [formData, setFormData] = useState({
     username: "",
@@ -70,7 +70,7 @@ export default function SignUp() {
       setIsLoading(true);
       setError(false);
 
-      const response = await fetch("/api/auth/sign-up", {
+      const response = await fetch(`${API_BASE_URL}/api/auth/sign-up`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

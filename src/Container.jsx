@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useDispatch, useSelector } from "react-redux";
 import { signInSuccess } from "./redux/user/userSlice";
-
+import { API_BASE_URL, getCookie } from "../utils/constants";
 export default function Container({ children }) {
   const dispatch = useDispatch();
   const { currentUser } = useSelector((state) => state.user);
@@ -12,11 +12,13 @@ export default function Container({ children }) {
       client_id: import.meta.env.VITE_GOOGLE_CLIENT_ID,
       callback: async (response) => {
         const decoded = jwtDecode(response.credential);
-
         const { name, picture, email } = decoded;
-        const res = await fetch("/api/auth/google", {
+        const res = await fetch(`${API_BASE_URL}/api/auth/google`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+            'Authorization': `Bearer ${getCookie("access_token")}`,
+          },
           body: JSON.stringify({
             name,
             email,
