@@ -1,7 +1,5 @@
 export const isProduction = import.meta.env.VITE_DEPLOYMENT === "PRODUCTION";
-export const API_BASE_URL = isProduction
-  ? "https://mern-auth-2joi.onrender.com"
-  : "";
+export const API_BASE_URL = "https://mern-auth-2joi.onrender.com";
 
 export const getCookie = (name) => {
   const value = `; ${document.cookie}`;

@@ -69,7 +69,7 @@ export default function Profile() {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-           "Authorization": `Bearer ${getCookie("access_token")}`,
+            Authorization: `Bearer ${getCookie("access_token")}`,
           },
           body: JSON.stringify(formData),
         }
@@ -82,7 +82,11 @@ export default function Profile() {
       dispatch(updateUserSuccess(data));
       setUpdateSuccess(true);
     } catch (error) {
-      dispatch(updateUserFailure(error));
+      dispatch(
+        updateUserFailure(
+          "Something went wrong while updating your profile. Please try again later."
+        )
+      );
     }
   };
 
@@ -102,7 +106,7 @@ export default function Profile() {
       }
       dispatch(deleteUserSuccess());
     } catch (error) {
-      dispatch(deleteUserFailure(error));
+      dispatch(deleteUserFailure("Something went wrong. Please try again."));
     }
   };
 

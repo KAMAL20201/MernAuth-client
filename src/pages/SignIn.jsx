@@ -8,6 +8,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import OAuth from "../components/OAuth";
 import { API_BASE_URL } from "../../utils/constants";
+import toast from "react-hot-toast";
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
@@ -43,7 +44,8 @@ export default function SignIn() {
 
       navigate("/");
     } catch (error) {
-      dispatch(signInFailure(error));
+      toast.error("Sign In Failed");
+      dispatch(signInFailure("Sign In Failed"));
     }
   };
 
