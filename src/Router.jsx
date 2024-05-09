@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import About from "./src/pages/About";
-import PrivateRoute from "./src/components/PrivateRoute";
-import Profile from "./src/pages/Profile";
-import SignIn from "./src/pages/SignIn";
-import SignUp from "./src/pages/SignUp";
-import HomePage from "./src/views/HomePage/HomePage";
-import Home from "./src/pages/Home";
+import About from "./pages/About";
+import PrivateRoute from "./components/PrivateRoute";
+import Profile from "./pages/Profile";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import HomePage from "./views/HomePage/HomePage";
+import Home from "./pages/Home";
 
 const Router = () => {
   return (

@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import OAuth from "../components/OAuth";
 import { API_BASE_URL } from "../../utils/constants";
 import toast from "react-hot-toast";
+import { setCookie } from "nookies";
 export default function SignIn() {
   const [formData, setFormData] = useState({});
   const { loading, error } = useSelector((state) => state.user);
@@ -40,6 +41,10 @@ export default function SignIn() {
         dispatch(signInFailure(data.message));
         return;
       }
+      setCookie(null, "access_token", data.token, {
+        path: "/",
+        maxAge: 24 * 60 * 60, // 1 day
+      });
       dispatch(signInSuccess(data?.validUser));
 
       navigate("/");

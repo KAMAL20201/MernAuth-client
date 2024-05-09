@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { signInSuccess } from "../redux/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import { API_BASE_URL } from "../../utils/constants";
+import { setCookie } from "nookies";
 const OAuth = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,6 +25,10 @@ const OAuth = () => {
       });
 
       const data = await res.json();
+       setCookie(null, "access_token", data.token, {
+         path: "/",
+         maxAge: 24 * 60 * 60, // 1 day
+       });
       dispatch(signInSuccess(data));
       navigate("/");
     } catch (error) {

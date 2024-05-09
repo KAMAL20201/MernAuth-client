@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const { currentUser } = useSelector((state) => state.user);
+  const { currentUser, loading } = useSelector((state) => state.user);
   return (
     <div className="bg-slate-200">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
@@ -25,6 +25,8 @@ const Header = () => {
                 alt="profile"
                 className="h-7 w-7 rounded-full object-cover"
               />
+            ) : loading ? (
+              <div className="h-7 w-7 bg-slate-400 rounded-full "></div>
             ) : (
               <li>Sign In</li>
             )}
